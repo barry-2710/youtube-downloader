@@ -1,0 +1,295 @@
+#:import NavigationLayout kivymd.uix.navigationdrawer.NavigationLayout
+#:import MDToolbar kivymd.uix.toolbar.MDToolbar
+#:import partial functools.partial
+#:import MDTextField kivymd.uix.textfield.MDTextField
+#:import MDFillRoundFlatButton kivymd.uix.button.MDFillRoundFlatButton
+#:import MDTextButton kivymd.uix.button.MDTextButton
+#:import MDRectangleFlatIconButton kivymd.uix.button.MDRectangleFlatIconButton
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+#:import MDDropdownMenu kivymd.uix.menu.MDDropdownMenu
+
+MyLayout:
+    scr_mngr: scr_mngr
+    orientation: 'vertical'
+    
+    ScreenManager:
+        id: scr_mngr
+        screen1: screen1
+        screen2: screen2
+        
+        
+        
+        Screen:
+            transition: SlideTransition(direction='left')
+            id: screen1
+            name: 'screen1'
+            audio_url: audio_url
+            video_url: video_url
+            result_mp3: result_mp3
+            result_mp4: result_mp4
+            thumbnail_mp3 : thumbnail_mp3
+            thumbnail_mp4 : thumbnail_mp4
+            proceed_mp3 : proceed_mp3
+            proceed_mp4 : proceed_mp4
+            loading_mp3: loading_mp3
+            loading_mp3_2: loading_mp3_2
+            loading_mp4: loading_mp4
+            loading_mp4_2: loading_mp4_2
+            song_name_mp3: song_name_mp3
+            song_name_mp4: song_name_mp4
+            proceed_mp4: proceed_mp4
+            proceed_mp3: proceed_mp3
+            load_mp3_button : load_mp3_button
+            load_mp4_button : load_mp4_button
+            
+            
+
+            BoxLayout:
+                orientation:'vertical'
+    
+
+                MDToolbar:
+                    title: 'YouDownload'
+                    halign: 'center'
+                    valign: 'center'
+                    md_bg_color: app.theme_cls.primary_dark
+                    specific_text_color: 1, 1, 1, 1
+                    right_action_items: [["download", lambda x: root.test()]]
+        
+                MDBottomNavigation:
+                    elevation: 20
+                    md_bg_color: app.theme_cls.primary_dark
+
+                    MDBottomNavigationItem:
+                        name: 'audio'
+                        text: 'Audio'
+                        icon: 'file-music'
+
+            
+                        
+                        BoxLayout: 
+                            padding: "15dp"
+                            MDLabel:
+                                pos_hint: {"center_y": 1}
+                                halign: "center"
+                                text: "Audio Downloader"
+                                font_style : "Button"
+
+
+                        BoxLayout: 
+                            padding: "15dp"
+                
+                            MDTextField:
+                                id: audio_url
+	                            hint_text : "Enter the YouTube URL"
+                                pos_hint: {"center_y": 0.9}
+                        BoxLayout: 
+                            id: loading_mp3
+                            padding: "15dp"
+                            MDFillRoundFlatButton:
+                                id: load_mp3_button
+                                size_hint_x: 0.01
+                                icon: "android"
+                                text: "Load"
+                                pos_hint: {"center_x": .5, "center_y": .8}
+                                on_release:
+		                            root.verify()
+                        BoxLayout: 
+                            id:loading_mp3_2
+                            padding: "15dp"
+                            MDLabel:
+                                text: "Loading..."
+                                halign: "center"
+                        BoxLayout: 
+                            
+                            padding: "15dp"
+                            AsyncImage:
+                                id:thumbnail_mp3
+                                source : "https://i.ytimg.com/vi/YcMdUjcq3eQ/maxresdefault.jpg"
+                        BoxLayout: 
+                            id: result_mp3
+                            padding: "15dp"
+                            MDLabel:
+                                id: song_name_mp3
+                                text: ""
+                                halign: "center"
+                                pos_hint : {'center_x':.5, 'y':-.3}
+                
+                        BoxLayout:  
+                            padding: "15dp"
+                            MDRectangleFlatIconButton:
+                                id : proceed_mp3
+                                icon: "download"
+                                text : "Download Mp3"
+                                size_hint_x : 1
+                                disabled: True
+                                on_release: 
+                                    root.go_on()
+                            
+ #########################################################################################################################                           
+
+                    MDBottomNavigationItem:
+                        name: 'video'
+                        text: 'Video'
+                        icon: 'file-video'
+
+
+                        BoxLayout: 
+                            padding: "15dp"
+                            MDLabel:
+                                pos_hint: {"center_y": 1}
+                                halign: "center"
+                                text: "Video Downloader"
+                                font_style : "Button"
+
+                        BoxLayout: 
+                            padding: "15dp"
+
+                            MDTextField:
+                                id: video_url
+	                            hint_text : "Enter the YouTube URL"
+                                pos_hint: {"center_y": 0.9}
+
+                        
+                        BoxLayout: 
+                            id: loading_mp4
+                            padding: "15dp"
+                            MDFillRoundFlatButton:
+                                id: load_mp4_button
+                                size_hint_x: 0.01
+                                text: "Load"
+                                pos_hint: {"center_x": .5, "center_y": .8}
+                                on_release:
+		                            root.download_mp4()
+                        BoxLayout: 
+                            id:loading_mp4_2
+                            padding: "15dp"
+                            MDLabel:
+                                text: "Loading..."
+                                halign: "center"
+                        BoxLayout: 
+                            
+                            padding: "15dp"
+                            AsyncImage:
+                                id:thumbnail_mp4
+                                source : "https://i.ytimg.com/vi/YcMdUjcq3eQ/maxresdefault.jpg"
+                        BoxLayout: 
+                            id: result_mp4
+                            padding: "15dp"
+                            MDLabel:
+                                id: song_name_mp4
+                                text: ""
+                                halign: "center"
+                                pos_hint : {'center_x':.5, 'y':-.3}
+                                                                             
+                
+                        BoxLayout:  
+                            padding: "15dp"
+                            MDRectangleFlatIconButton:
+                                id : proceed_mp4
+                                text : "Download Mp4"
+                                halign: "center"
+                                icon : "download"
+                                size_hint_x : 1
+                                disabled: True
+                              
+                                on_release:
+                                    MDDropdownMenu(items=root.res(),width_mult=4).open(self)
+                                    
+                                
+                                
+                                
+                                
+
+                    MDBottomNavigationItem:
+                        name: 'youtube+'
+                        text: 'YouTube +'
+                        icon: 'youtube'
+
+                        MDLabel:
+                            text: 'Comming soon...'
+                            halign: 'center'
+
+                    MDBottomNavigationItem:
+                        name: 'settings'
+                        text: 'Settings'
+                        icon: 'settings'
+
+                        ScrollView:
+
+                            MDList:
+
+                                OneLineAvatarIconListItem:
+                                    text: "Change Theme"
+                                    on_release: app.show_theme_picker()
+
+                                    IconLeftWidget:
+                                        icon: "theme-light-dark"
+
+                                TwoLineAvatarListItem:
+                                    text: "Download location"
+                                    secondary_text: "'storage0/YouDownload'"
+                                    
+                                    
+
+                                    IconLeftWidget:
+                                        icon: "download"
+
+                                OneLineAvatarIconListItem:
+                                    text: "History"
+                                    on_release: root.test()
+
+                                    IconLeftWidget:
+                                        icon: "history"
+
+                                TwoLineAvatarListItem:
+                                    text: "Developed by"
+                                    secondary_text: "Bharth B"
+                                    on_release: 
+                                        root.barry()
+                                    
+
+                                    IconLeftWidget:
+                                        icon: "developer-board"
+
+
+        Screen:
+            transition: SlideTransition(direction='left')
+            id: screen2
+            container :container
+            name : 'screen2'
+            BoxLayout:
+                orientation:'vertical'
+    
+
+                MDToolbar:
+                    title: 'YouDownload'
+                    halign: 'center'
+                    valign: 'center'
+                    md_bg_color: app.theme_cls.primary_dark
+                    specific_text_color: 1, 1, 1, 1
+                    right_action_items: [["step-backward", lambda x: root.test1() ]]
+
+                ScrollView:
+
+                    MDList:
+                        id: container
+                    
+        
+                
+
+
+
+
+
+
+
+
+
+
+
+    
+
+    
+
+ 
